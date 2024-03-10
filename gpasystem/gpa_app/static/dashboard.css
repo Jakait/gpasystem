@@ -1,0 +1,152 @@
+/* General Body Style */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar Styles */
+  #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    background-color: #006400; /* Dark Green */
+    color: white;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  }
+  
+  #sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 20px 15px;
+    background-color: #008000; /* Green */
+    color: white;
+  }
+  
+  #sidebar-wrapper .list-group-item:hover,
+  #sidebar-wrapper .list-group-item:focus {
+    background-color: #004d40; /* Darker Green */
+    color: white;
+    text-decoration: none;
+  }
+  
+  #sidebar-wrapper .list-group-item-action.bg-light {
+    background-color: #ffffff !important; /* Ensuring override */
+    color: #008000; /* Text color */
+  }
+  
+  #sidebar-wrapper .list-group-item-action.bg-light:hover,
+  #sidebar-wrapper .list-group-item-action.bg-light:focus {
+    background-color: #f8f9fa !important; /* Lighter on hover/focus */
+  }
+  
+  /* Content Styles */
+  #page-content-wrapper {
+    width: 100%;
+    transition: all 0.25s ease-out;
+  }
+  
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+  
+    #page-content-wrapper {
+      margin-left: 15rem;
+      margin-right: -15rem;
+    }
+  }
+  
+  /* Optional: Adjusting the toggle button for smaller screens */
+  .sidebar-toggle {
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Enhancing the responsiveness */
+  @media (max-width: 767px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+    #sidebar-wrapper .sidebar-heading,
+    #sidebar-wrapper .list-group {
+      display: none;
+    }
+    #sidebar-wrapper .sidebar-heading.active,
+    #sidebar-wrapper .list-group.active {
+      display: block;
+    }
+    #page-content-wrapper {
+      margin: 0;
+      padding: 1rem;
+    }
+  }
+
+  /* Form Styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: .5rem;
+    color: #495057; /* Darker text for better readability */
+    font-weight: bold; /* Make labels stand out */
+}
+
+.input-group input, .input-group select {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.input-group input:focus, .input-group select:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+
+/* Custom Submit Button Styles */
+button[type="submit"] {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+  
