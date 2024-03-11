@@ -1,0 +1,44 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+        <!-- Your content here -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>User Type</th>
+                        <th>Course Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample Data, replace this with actual user data from your backend -->
+                    <tr>
+                        <td>user@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>Smith</td>
+                        <td>Admin</td>
+                        <td>Computer Science</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- Add more rows for additional users -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

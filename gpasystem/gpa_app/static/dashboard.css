@@ -3,6 +3,7 @@ body {
     font-family: 'Nunito', sans-serif;
     background-color: #f8f9fa;
     min-height: 100vh;
+    overflow-x: hidden;
   }
   
   /* Sidebar Styles */
@@ -90,6 +91,8 @@ body {
     #page-content-wrapper {
       margin: 0;
       padding: 1rem;
+      width: 100%;
+
     }
   }
 
@@ -99,7 +102,7 @@ body {
 }
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 0.5rem;
 }
 
 .input-group label {
@@ -140,6 +143,7 @@ button[type="submit"] {
     border-radius: .25rem;
     font-size: 1rem;
     line-height: 1.5;
+    margin-top: 1 rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 

@@ -15,7 +15,7 @@ class CustomUserManager(UserManager):
 
         return user
     def create_user(self, email= None, password = None, **etxra_fields):
-        etxra_fields.setdefault('is_staff', False)
+        etxra_fields.setdefault('is_staff', True)
         etxra_fields.setdefault('is_superuser', False)
 
         return self. _create_user(email,password,**etxra_fields)
@@ -32,12 +32,13 @@ class User(AbstractUser,PermissionsMixin):
     username =  models.CharField(max_length=66, blank=True, null=True)
     firstname =  models.CharField(max_length=66, blank=True, null=True)
     last_name = models.CharField(max_length=66, blank=True, null=True)
+    middle_name = models.CharField(max_length=66, blank=True, null=True)
     accesslevel = models.IntegerField()
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
@@ -66,6 +67,7 @@ class User(AbstractUser,PermissionsMixin):
 
     
 class Lecturer(models.Model):
+    Lec_no = models.CharField(max_length=10,blank=True, default="",unique=True)
     course_id  = models.ForeignKey('Course',on_delete=models.SET_NULL, null=True, blank=True)
     user_id = models.ForeignKey('User',on_delete=models.CASCADE, null=True,blank=True)
    
@@ -74,6 +76,7 @@ class Lecturer(models.Model):
         return self.user_id
     
 class Student(models.Model):
+    adm_no = models.CharField(max_length=10,blank=True, default="",unique=True)
     course_id  = models.ForeignKey('Course',on_delete=models.SET_NULL, null=True, blank=True)
     user_id = models.ForeignKey('User',on_delete=models.CASCADE, null=True,blank=True)
    
@@ -125,6 +128,7 @@ class Unit(models.Model):
     
 class Course(models.Model):
     course_name = models.CharField(max_length=66, blank=True, null=True)
+    course_code = models.CharField(max_length=10,blank=True, null = True,unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
