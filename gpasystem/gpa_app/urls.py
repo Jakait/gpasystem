@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name="login"),
     path('usereg/', views.registerUser, name = "adduser"),
-    path('userview', views.viewUser, name = "home"),
+    path('userview/', views.viewUser, name = "home"),
+    path('regcourse/', views.registerCourse, name = "addcourse"),
+    path('asynfetch/', views.fetchCourse, name = "fetchcourse"),
     
 ]

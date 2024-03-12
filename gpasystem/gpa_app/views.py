@@ -26,3 +26,24 @@ def registerUser(request):
 # view users
 def  viewUser(request):
     return render(request,'userview.html')
+
+
+# add course
+def registerCourse(request):
+    return render(request, 'courseadd.html')
+
+
+# fetch course or unit
+# add course
+def fetchCourse(request):
+    id = request.GET.get('course')
+    
+    unit = Unit.objects.all()
+    course = Course.objects.all()
+    if id == '101': 
+        return render(request, 'components/course.html')
+    elif id == '102':
+        return render(request, 'components/unit.html')
+    else:
+        return render(request, 'components/empty.html')
+  

@@ -27,8 +27,8 @@
                 <a href="#" class="list-group-item list-group-item-action bg-light">Add User</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">View Users</a>
             </div>
-            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">User</a>
-            <div class="collapse" id="userSubmenu">
+            <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Course</a>
+            <div class="collapse" id="courseSubmenu">
                 <a href="#" class="list-group-item list-group-item-action bg-light">Add unit/Course</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">View Unit/Course</a>
             </div>
@@ -54,28 +54,11 @@
 <!-- /#wrapper -->
 
 <!-- Bootstrap and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- <script src="{% static 'js/script.js' %}"></script> -->
-<script>
-    // Add this script to your HTML file
-    $(document).ready(function () {
-        // Toggle active class for the clicked link and collapse other submenus
-        $('.list-group-item').on('click', function () {
-            $('.list-group-item').removeClass('active');
-            $(this).addClass('active');
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
 
-            // Collapse other submenus
-            $('.collapse.show').removeClass('show');
-        });
 
-        // Highlight the active link on page load
-        var path = window.location.pathname;
-        $('.list-group-item').removeClass('active');
-        $('.list-group-item[href="' + path + '"]').addClass('active');
-    });
-</script>
 </body>
 </html>

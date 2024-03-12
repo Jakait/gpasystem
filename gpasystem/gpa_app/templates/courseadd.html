@@ -1,0 +1,26 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+
+<div class="container-fluid">
+<h1 class="mt-4">Welcome to GPA Dashboard unit/course</h1>
+<form   method="post">
+
+    <label for="id_course">Item:</label>
+    <select id="id_course" class="form-control" placeholder="Select Course" data-course-url="{% url 'fetchcourse' %}">
+        <option value="" >Select unit/course</option>
+        <option value="101" data-department-id="1">Course</option>
+        <option value="102" data-department-id="1">Unit</option>
+        
+        <!-- Add other courses as needed -->
+    </select>
+
+    <br>
+    <div id="courseupdate">
+        <!-- populate course or unit -->
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% endblock %}
