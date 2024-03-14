@@ -18,10 +18,9 @@
         <div class="list-group list-group-flush">
             <a href="#dashboardSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Dashboard</a>
             <div class="collapse" id="dashboardSubmenu">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Analytics</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Activity</a>
-            </div>
+                <a href="{% url 'home' %}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+               
+            </div> 
             <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">User</a>
             <div class="collapse" id="userSubmenu">
                 <a href="{% url 'adduser' %}" class="list-group-item list-group-item-action bg-light">Add User</a>

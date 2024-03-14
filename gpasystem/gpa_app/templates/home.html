@@ -1,0 +1,53 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="card-body">
+                    <h5 class="card-title">Number of Students</h5>
+                    <p class="card-text">Total: {{ total_students }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Number of Lecturers</h5>
+                    <p class="card-text">Total: {{ total_lecturers }}</p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Number of Units</h5>
+                    <p class="card-text">Total: {{ total_units }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Number of Results</h5>
+                    <p class="card-text">Total: {{ total_results }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Number of Courses</h5>
+                    <p class="card-text">Total: {{ total_courses }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add more card components as needed -->
+    </div>
+</div>
+{% endblock %}

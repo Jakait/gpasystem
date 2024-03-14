@@ -3,7 +3,7 @@ from . import views
 
 # to be edited to desired routes
 urlpatterns = [
-    path('', views.index, name="login"),
+    path('', views.signin, name="login"),
     path('usereg/', views.registerUser, name = "adduser"),
     path('userview/', views.viewUser, name = "viewuser"),
     path('dashboard/', views.dashboard, name = "home"),

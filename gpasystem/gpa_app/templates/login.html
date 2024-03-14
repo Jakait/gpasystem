@@ -12,7 +12,14 @@
     <div class="login-container">
 
         <h2>GPA System Login</h2>
-        <form action="/submit-your-login-form" method="POST">
+
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+             {% endfor %}   
+        <form action="" method="POST">
+            {% csrf_token %}
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
