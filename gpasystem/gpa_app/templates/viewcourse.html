@@ -1,0 +1,30 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+             {% endfor %}       
+        <!-- Your content here -->
+
+        <form   method="post">
+            {% csrf_token %}
+        
+            <label for="id_courseview">Item:</label>
+            <select id="id_courseview" class="form-control" placeholder="Select Course" name="unitcourse" data-course-url="{% url 'fetchcourseview' %}">
+                <option value="" >Select unit/course</option>
+                <option value="101" data-department-id="1">Course</option>
+                <option value="102" data-department-id="1">Unit</option>
+                
+                <!-- Add other courses as needed -->
+            </select>
+        </form>
+        <div class="table-responsive"  id="tableviewcourse">
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

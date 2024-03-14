@@ -1,0 +1,45 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+             {% endfor %}      
+<form method="post">
+    {% csrf_token %}
+
+    <label for="student">Student:</label>
+    <select id="student" class="form-control" placeholder="Select Student" name="student" >
+        <option value="">Select student</option>
+        <option value="101" data-department-id="1">Course</option>
+        <option value="102" data-department-id="1">Unit</option>
+        
+    </select>
+
+    <br>
+    <select id="unit" class="form-control" placeholder="Select unit" name="unit" >
+        <option value="">Select unit</option>
+        <option value="101" data-department-id="1">Descrete</option>
+        <option value="102" data-department-id="1">Unit</option>
+        
+    </select>
+    <br>
+    <select id="semister" class="form-control" placeholder="Select Semister" name="Semister" >
+        <option value="">Select Semister</option>
+        <option value="101" data-department-id="1">Descrete</option>
+        <option value="102" data-department-id="1">Semister</option>
+        
+    </select>
+    <br>
+
+    <label for="score">Score:</label>
+    <input type="number" class="form-control" id="score" name="score" required>
+    <br>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

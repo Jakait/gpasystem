@@ -24,13 +24,13 @@
             </div>
             <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">User</a>
             <div class="collapse" id="userSubmenu">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Add User</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">View Users</a>
+                <a href="{% url 'adduser' %}" class="list-group-item list-group-item-action bg-light">Add User</a>
+                <a href="{% url 'viewuser' %}" class="list-group-item list-group-item-action bg-light">View Users</a>
             </div>
             <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Course</a>
             <div class="collapse" id="courseSubmenu">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Add unit/Course</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">View Unit/Course</a>
+                <a href="{% url 'addcourse' %}" class="list-group-item list-group-item-action bg-light">Add unit/Course</a>
+                <a href="{% url 'viewcourse' %}" class="list-group-item list-group-item-action bg-light">View Unit/Course</a>
             </div>
             <a href="#resultsSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Results</a>
             <div class="collapse" id="resultsSubmenu">
@@ -54,9 +54,11 @@
 <!-- /#wrapper -->
 
 <!-- Bootstrap and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{% static 'js/script.js' %}"></script>
 
 

@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Course ID</th>
+            <th>Course name</th>
+            <th>course code</th>
+            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Sample Data, replace this with actual course data from your backend -->
+        {% for  course in courses %}
+        <tr>
+          
+            <td>{{ course.id }}</td>
+            <td>{{ course.course_name}}</td>
+            <td>{{ course.course_code}}</td>
+        
+            <td>
+                <a href="#" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <a href="#" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+        <!-- Add more rows for additional users -->
+    </tbody>
+</table>

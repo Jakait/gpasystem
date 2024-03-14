@@ -8,8 +8,14 @@
 
         <div class="container-fluid">
             <h1 class="mt-4">Welcome to GPA Dashboard</h1>
+
+            {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+            {% endfor %}   
             <!-- Your content here -->
-            <form id="registrationForm"  method="post">
+            <form id="registrationuserForm"  method="post" data-course-url = "{% url 'fetchuserCourse' %}">
                 {% if form.errors %}
                             <div class="alert alert-danger">
                                 <strong>Oops! There was an error:</strong>
@@ -40,7 +46,7 @@
                     {{ form.email }}
                 </div>
                 <div class="form-group">
-                    <label for="email">Phone</label>
+                    <label for="form">Phone</label>
                     {{ form.phone_number }}
                 </div>
                 <div class="form-group">
@@ -48,12 +54,24 @@
                     {{ form.password1 }}
                 </div>
                 <div class="form-group">
+                <label for="password">Confirm Password</label>
+                    {{ form.password2 }}
+                </div>
+                <div class="form-group">
                     <label for="userType">User Type</label>
-                    <!-- <select id="userType" name="userType" class="form-control" onchange="showCourseSelection()"> -->
+ 
                         
                         {{ form.accesslevel }}
                         
-                    <!-- </select> -->
+                    
+                </div>
+                <div class="form-group" id="addcourses">
+                   
+ 
+                        
+                        
+                        
+                    
                 </div>
                
                 <button type="submit" class="btn btn-primary">Submit</button>

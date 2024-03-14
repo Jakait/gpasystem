@@ -1,9 +1,10 @@
 
 <label for="course">Course:</label>
-<select id="courseid" class="form-control" placeholder="Select Course" data-course-id="courseid">
-    <option value="1001" data-course-id="101">Unit 1</option>
+<select id="courseid" class="form-control" name="course_id" placeholder="Select Course" data-course-id="courseid">
+    {% for course in courses %}
+    <option value="{{ course.id }}" {% if course.id == request.POST.usercourse %} selected {% endif %}>{{ course.course_name }}</option>
     
-    <!-- Add other units as needed -->
+    {% endfor %}
 </select>
 <br>
 <label for="Unit">Unit Name:</label>

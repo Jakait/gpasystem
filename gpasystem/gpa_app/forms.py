@@ -15,13 +15,18 @@ class UserRegistrationForm(UserCreationForm):
     phone_number = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone Number'}))
     firstname = forms.CharField(max_length=66, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter First Name'}))
     last_name = forms.CharField(max_length=66, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Last name'}))
-    middle_name = forms.CharField(max_length=66, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Middle Name'}))
+    middle_name = forms.CharField(max_length=66, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Middle Name'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
-    accesslevel = forms.ChoiceField(choices=USER_TYPES, widget=forms.Select(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))
+    accesslevel = forms.ChoiceField(choices=USER_TYPES, widget=forms.Select(attrs={'class': 'form-control','id':'idaccess'}))
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ( 'email', 'phone_number', 'firstname','last_name','middle_name','password1','accesslevel')
+        fields = ( 'email', 'phone_number', 'firstname','middle_name','last_name','password1','password2','accesslevel')
+    def clean_accesslevel(self):
+        accesslevel = self.cleaned_data.get('accesslevel')
+        # Convert accesslevel to an integer
+        return int(accesslevel)
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
         # Remove any non-digit characters from the phone number

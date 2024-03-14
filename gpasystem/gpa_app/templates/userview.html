@@ -3,6 +3,11 @@
 {% block mid_section %}
     <div class="container-fluid">
         <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+             {% endfor %}       
         <!-- Your content here -->
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -19,13 +24,15 @@
                 </thead>
                 <tbody>
                     <!-- Sample Data, replace this with actual user data from your backend -->
+                    {% for user in users %}
                     <tr>
-                        <td>user@example.com</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>Smith</td>
-                        <td>Admin</td>
-                        <td>Computer Science</td>
+                      
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.middlename }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.user_type }}</td>
+                        <td>{{ user.course_name }}</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i> Edit
@@ -34,7 +41,9 @@
                                 <i class="fas fa-trash-alt"></i> Delete
                             </a>
                         </td>
+
                     </tr>
+                    {% endfor %}
                     <!-- Add more rows for additional users -->
                 </tbody>
             </table>

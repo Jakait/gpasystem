@@ -33,7 +33,7 @@ class User(AbstractUser,PermissionsMixin):
     firstname =  models.CharField(max_length=66, blank=True, null=True)
     last_name = models.CharField(max_length=66, blank=True, null=True)
     middle_name = models.CharField(max_length=66, blank=True, null=True)
-    accesslevel = models.IntegerField()
+    accesslevel = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
 
     is_active = models.BooleanField(default=True)

@@ -1,0 +1,7 @@
+<label for="userType">Course</label>
+<select id="usercourse" name="usercourse" class="form-control">
+    {% for course in courses %}
+    <option value="{{ course.id }}" {% if course.id == request.POST.usercourse %} selected {% endif %}>{{ course.course_name }}</option>
+    
+    {% endfor %}
+</select>
