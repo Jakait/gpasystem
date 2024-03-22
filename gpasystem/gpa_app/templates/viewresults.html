@@ -1,0 +1,48 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}       
+    <!-- Your content here -->
+    <div id="student-table" class="table-responsive">
+        
+    <select id="user-student" class="form-control" data-course-url = "{% url 'displaymarks' %}">
+        <option value="0">Select student</option>
+        {% for student in students %}
+        <option value="{{ student.id }}">{{ student.user_id.firstname }}  {{ student.user_id.last_name }} ({{ student.adm_no }})</option>
+        {% endfor %}
+        <!-- Add other user types as needed -->
+    </select>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Unit Name</th>
+                    <th>semister</th>
+                    <th>student name</th>
+                    <th>admission number</th>
+                    <th>Marks</th>
+                    <th>GPA</th>
+                </tr>
+            </thead>
+            <tbody  id="displaymarks">
+                <!-- Sample Data, replace this with actual user data from your backend -->
+               <tr>
+                
+                    <td colspan="6">No data available</td>
+            
+               </tr>
+                <!-- Add more rows for additional units -->
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -12,33 +12,38 @@
     {% csrf_token %}
 
     <label for="student">Student:</label>
-    <select id="student" class="form-control" placeholder="Select Student" name="student" >
+    <select id="student" class="form-control" placeholder="Select Student" name="student" data-course-url ="{% url 'studentunits' %}">
         <option value="">Select student</option>
-        <option value="101" data-department-id="1">Course</option>
-        <option value="102" data-department-id="1">Unit</option>
+        {% for student in students %}
+        <option value="{{ student.id }}">{{ student.firstname }} {{ student.last_name }}</option>
+        {% endfor %}
+        
         
     </select>
 
     <br>
-    <select id="unit" class="form-control" placeholder="Select unit" name="unit" >
+   
+    <select id="unitnames" class="form-control" placeholder="Select unit" name="unitname" >
         <option value="">Select unit</option>
-        <option value="101" data-department-id="1">Descrete</option>
-        <option value="102" data-department-id="1">Unit</option>
+        
+        
         
     </select>
+    
+    
     <br>
     <select id="semister" class="form-control" placeholder="Select Semister" name="Semister" >
-        <option value="">Select Semister</option>
-        <option value="101" data-department-id="1">Descrete</option>
-        <option value="102" data-department-id="1">Semister</option>
+        {% for sem in sems %}
+        <option value="{{ sem.id }}">{{ sem.sem_name }}</option>
+        {% endfor %}
         
     </select>
     <br>
 
     <label for="score">Score:</label>
     <input type="number" class="form-control" id="score" name="score" required>
+    <span id="scoreError" style="color: red; display: none;">Score must be between 0 and 100.</span>
     <br>
-
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

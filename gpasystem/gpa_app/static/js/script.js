@@ -1,5 +1,28 @@
-   // Add this script to your HTML file
+
    $(document).ready(function () {
+
+
+    // Get the score input element
+    const scoreInput = document.getElementById('score');
+    if(scoreInput){
+    // Get the error message element
+    const scoreError = document.getElementById('scoreError');
+
+    // Add an event listener to the input for validation
+    scoreInput.addEventListener('input', function() {
+        const score = parseInt(scoreInput.value);
+        if (isNaN(score) || score < 0 || score > 100) {
+            // Show error message and mark input as invalid
+            scoreError.style.display = 'inline';
+            scoreInput.setCustomValidity('Invalid score');
+        } else {
+            // Hide error message and mark input as valid
+            scoreError.style.display = 'none';
+            scoreInput.setCustomValidity('');
+        }
+    });
+
+  }
     // this an element for fetching units and course using ajax on document reload
 
     courselement = document.getElementById("id_course");
@@ -69,6 +92,44 @@
         });
   
       });
+
+
+      // display student marks
+      $("#user-student").change(function(e){
+        e.preventDefault()
+        var studentId = $(this).val();
+        var url = $("#user-student").attr("data-course-url");  
+  
+        $.ajax({                     
+          url: url,                   
+          data: {
+            'studentid': studentId      
+          },
+          success: function (data) {  
+           
+            $("#displaymarks").html(data);  
+          }
+        });
+  
+      })
+
+      //select student course
+      $("#student").change(function(e){
+        e.preventDefault()
+        var studentId = $(this).val();
+        var url = $("#student").attr("data-course-url");  
+  
+        $.ajax({                     
+          url: url,                   
+          data: {
+            'studentid': studentId      
+          },
+          success: function (data) {   
+            $("#unitnames").html(data);  
+          }
+        });
+  
+      })
 
       //view courses and units
       $("#id_courseview").change(function (e) {

@@ -85,6 +85,17 @@ def  viewUser(request):
         })
     return render(request,'userview.html',{'users':user_data})
 
+# fetch students units
+def fetchstudentsunit(request):
+    user_id = request.GET.get('studentid')
+    student = Student.objects.get(user_id=user_id)
+    courseid = student.course_id
+    units = Unit.objects.filter(course_id=courseid)
+
+
+    return render(request,'components/studentunits.html',{'studentunits':units})
+
+
 
 # add course
 def registerCourse(request):
@@ -134,12 +145,34 @@ def registerCourse(request):
 
 # dashboard
 def dashboard(request):
+    
+    context = {}
     return render(request,'home.html')
     
 
 # add results
 def registerResults(request):
-    return render(request, 'resultadd.html')
+    students = User.objects.filter(accesslevel=3)
+    sems = Semister.objects.all()
+    if request.method == "POST":
+        print(request.POST)
+        sem_id = request.POST.get("Semister")
+        unit_id = request.POST.get("unitname")
+        student_id = request.POST.get("student")
+        score = request.POST.get("score")
+        if not sem_id or not unit_id or not student_id or not score:
+            messages.error(request, "Please fill all the fields")
+        else:
+            unit = Unit.objects.get(id=unit_id) 
+            semister = Semister.objects.get(id=sem_id)
+            student = Student.objects.get(user_id=student_id)
+            if Exam.objects.filter(unit_id = unit,semister = semister,student=student).exists():
+                messages.error(request, f"Results for {student.user_id.firstname} {student.user_id.last_name} {unit.unit_name} in the {semister.sem_name} already exist.")
+            else:
+                course = Exam.objects.create(unit_id = unit,semister = semister,student=student,score=score,status=1)
+                messages.success(request, "Exam saved successfully")
+                
+    return render(request, 'resultadd.html',{'students':students,'sems':sems})
 
 # fist get view course endpoint 
 def viewCourse(request):
@@ -213,6 +246,44 @@ def getAdmno(admn):
     else:
         user_adm_no = admn +"1"   # If there are no existing user, set adm_no to adm1
     return user_adm_no
+# view results
+def viewResults(request):
+    user =request.user
+    # if user.accesslevel == 1:
+    exams = Exam.objects.all()
+    students = Student.objects.all()
+    # elif user.accesslevel == 2:
+    #     pass
+    # else:
+    #     pass
+
+    return render(request, "viewresults.html",{"exams":exams,"students":students})
+
+# display results per student
+def displayResults(request):
+    student = request.GET.get("studentid")
+    try:
+        # Filter exams for the given student_id and order by course_id
+        exams = Exam.objects.filter(student_id=student).order_by('unit_id')
+        scores = 0
+        number = 0
+        for exam in exams:
+            scores +=exam.score
+            number += 1
+        if number == 0:
+            average = 0
+        else:
+            average = scores / number
+        average =  round(average, 1)
+
+        
+
+        # Pass the ordered exam queryset to the template for rendering
+        return render(request, 'components/viewexams.html', {'exams': exams,'average':average,'scores':scores})
+
+    except Exam.DoesNotExist:
+        # Handle the case where no exam records are found for the given student_id
+        return render(request, 'components/empty.html')
 
 # login
 def signin(request):
