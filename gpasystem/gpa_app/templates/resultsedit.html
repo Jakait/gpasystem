@@ -12,36 +12,38 @@
     {% csrf_token %}
 
     <label for="student">Student:</label>
-    <select id="student" class="form-control" placeholder="Select Student" name="student" data-course-url ="{% url 'studentunits' %}">
-        <option value="">Select student</option>
-        {% for student in students %}
-        <option value="{{ student.id }}">{{ student.firstname }} {{ student.last_name }}</option>
-        {% endfor %}
+    <select id="student" class="form-control" placeholder="Select Student" name="student">
+               
+        <option value="{{ exam.student.id }}">{{exam.student.user_id.firstname }} {{ exam.student.user_id.last_name }}</option>
+       
         
         
     </select>
 
     <br>
    
-    <select id="unitnames" class="form-control" placeholder="Select unit" name="unitname" >
-        <option value="">Select unit</option>
-        
+    <label for="unit">unit:</label>
+    <select id="unit" class="form-control" placeholder="Select unit" name="unit">
+               
+        <option value="{{ exam.unit_id.id }}">{{ exam.unit_id.unit_name}}</option>
+       
         
         
     </select>
+    <br>
     
     <br>
     <label for="lab">Lab(out of 30)</label>
-    <input type="number" class="form-control" name="lab" id="lab" min="0" max="30" oninput="validity.valid||(value='');">
+    <input type="number" class="form-control" name="lab" id="lab" value="{{ exam.lab }}" min="0" max="30" oninput="validity.valid||(value='');">
     <br>
     <label for="quiz">Quiz(out of 20)</label>
-    <input type="number" class="form-control" name="quiz" id="quiz" min="0" max="20" oninput="validity.valid||(value='');">
+    <input type="number" class="form-control" name="quiz" value="{{ exam.quiz }}" id="quiz" min="0" max="20" oninput="validity.valid||(value='');">
     <br>
     <label for="endsem">End Sem(out of 20)</label>
-    <input type="number" class="form-control" name="endsem" id="endsem" min="0" max="20" oninput="validity.valid||(value='');">
+    <input type="number" class="form-control" name="endsem" id="endsem" value="{{ exam.endsem }}" min="0" max="20" oninput="validity.valid||(value='');">
     <br>
     <label for="midsem">Mid Sem(out of 30)</label>
-    <input type="number" class="form-control" name="midsem" id="midsem" min="0" max="30" oninput="validity.valid||(value='');">
+    <input type="number" class="form-control" name="midsem" id="midsem" value="{{ exam.midsem }}" min="0" max="30" oninput="validity.valid||(value='');">
     <br>
 
     <label for="total_score">Total Score:</label>

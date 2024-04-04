@@ -1,5 +1,9 @@
 {% for exam in exams %}
 <tr>
+    <td colspan="9">Remarks: {{ remarks }}</td>
+    
+</tr>
+<tr>
     <td>{{ exam.unit_id.unit_name }}</td>
     <td>{{ exam.student.user_id.firstname }} {{ exam.student.user_id.last_name }}</td>
     <td>{{ exam.student.adm_no}}</td>
@@ -17,18 +21,7 @@
     {% else %}
     <td>1</td>
     {% endif %}
-    <td>
-        {% if request.user.accesslevel != 3 %}
-        <a href="{% url 'editexam' exam.id %}" class="btn btn-warning btn-sm">
-            <i class="fas fa-edit"></i> Edit
-        </a>
-        <a href="javascript:void(0);" class="btn btn-danger btn-sm deleteitem"  data-url="{% url 'deletexam' exam.id %}" data-name = "Exam {{  exam.unit_id.unit_name }} for student {{ exam.student.user_id.firstname }} {{ exam.student.user_id.last_name }}">
-            <i class="fas fa-trash-alt"></i> Delete
-        </a>
-        {% endif %}
-    </td>
-    
-             
+   
 
 </tr>
 {% endfor %}

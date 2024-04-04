@@ -2,7 +2,7 @@
 {% load static %}
 {% block mid_section %}
     <div class="container-fluid">
-        <h1 class="mt-4">Welcome to the Admin Dashboard</h1>
+        <h1 class="mt-4">Welcome to GPA {% if request.user.accesslevel == 1 %} Admin {% elif request.user.accesslevel == 2 %} Lecturer {% else %} Student {% endif %}portal  </h1>
         {% for message in messages %}
             <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
                 {{ message }}
@@ -28,18 +28,20 @@
                     <tr>
                       
                         <td>{{ user.email }}</td>
-                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.firstname }} </td>
                         <td>{{ user.middlename }}</td>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.user_type }}</td>
                         <td>{{ user.course_name }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm">
+                            <a href="{% url 'edituser' user.id %}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
-                            <a href="#" class="btn btn-danger btn-sm">
+                            {% if logged_in_user.accesslevel == 1 %}
+                            <a  href="javascript:void(0);" class="btn btn-danger btn-sm deleteuser"  data-url="{% url 'deleteuser' user.id %}">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </a>
+                            {% endif %}
                         </td>
 
                     </tr>
@@ -51,3 +53,4 @@
     </div>
 </div>
 {% endblock %}
+

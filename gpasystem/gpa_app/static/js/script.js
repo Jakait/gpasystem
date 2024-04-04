@@ -1,28 +1,109 @@
 
    $(document).ready(function () {
+// delete course or unit
+// Attach the event listener to a parent element that exists on page load (e.g., document)
+document.addEventListener('click', function(event) {
+  // Check if the clicked element has the class 'deletecourse'
+  if (event.target && event.target.classList.contains('deleteitem')) {
+      event.preventDefault(); // Prevent the default behavior of the link
 
+      var url = event.target.getAttribute('data-url');
+      let name = event.target.getAttribute('data-name')
+      
+      // Show a confirmation dialog using Bootbox
+      bootbox.confirm({
+          message: `Are you sure you want to delete ${name}`,
+          buttons: {
+              confirm: {
+                  label: 'Yes',
+                  className: 'btn-danger'
+              },
+              cancel: {
+                  label: 'No',
+                  className: 'btn-secondary'
+              }
+          },
+          callback: function(result) {
+              // If user confirms deletion, redirect to delete URL
+              if (result) {
+                  window.location.href = url;
+              }
+          }
+      });
+  }
+});
+
+
+
+
+
+    // Add a click event listener to the delete button
+    document.querySelectorAll('.deleteuser').forEach(function(button) {
+      button.addEventListener('click', function() {
+          var userurl = this.getAttribute('data-url');
+          
+          // Show a confirmation dialog using Bootbox
+          bootbox.confirm({
+              message: "Are you sure you want to delete this user?",
+              buttons: {
+                  confirm: {
+                      label: 'Yes',
+                      className: 'btn-danger'
+                  },
+                  cancel: {
+                      label: 'No',
+                      className: 'btn-secondary'
+                  }
+              },
+              callback: function(result) {
+                  // If user confirms deletion, redirect to delete URL
+                  if (result) {
+                      window.location.href = userurl;
+                  }
+              }
+          });
+      });
+  });
+
+    
+    // edit usertype
+    var userType =document.getElementById('usertypeedit');
+
+    if (userType){
+
+      userType = userType.value
+    console.log(userType)
+    var courseField = document.getElementById('courseField');
+
+    if ( userType === '2'|| userType === '3') {
+        courseField.style.display = 'block';
+    } else {
+        courseField.style.display = 'none';
+    }
+  }
 
     // Get the score input element
-    const scoreInput = document.getElementById('score');
-    if(scoreInput){
-    // Get the error message element
-    const scoreError = document.getElementById('scoreError');
+    function calculateTotal() {
+      var lab = parseInt(document.getElementById('lab').value) || 0;
+      var quiz = parseInt(document.getElementById('quiz').value) || 0;
+      var endsem = parseInt(document.getElementById('endsem').value) || 0;
+      var midsem = parseInt(document.getElementById('midsem').value) || 0;
+    
 
-    // Add an event listener to the input for validation
-    scoreInput.addEventListener('input', function() {
-        const score = parseInt(scoreInput.value);
-        if (isNaN(score) || score < 0 || score > 100) {
-            // Show error message and mark input as invalid
-            scoreError.style.display = 'inline';
-            scoreInput.setCustomValidity('Invalid score');
-        } else {
-            // Hide error message and mark input as valid
-            scoreError.style.display = 'none';
-            scoreInput.setCustomValidity('');
-        }
-    });
-
+      var total = lab + quiz + endsem + midsem;
+      document.getElementById('total_score').value = total;
   }
+
+  // Call calculateTotal() function whenever any input field changes
+  var scoreInput = document.getElementById('total_score');
+if (scoreInput) {
+  document.querySelectorAll('input[type="number"]').forEach(item => {
+      item.addEventListener('input', calculateTotal);
+  });
+
+  // Initial calculation when the page loads
+  calculateTotal();
+}
     // this an element for fetching units and course using ajax on document reload
 
     courselement = document.getElementById("id_course");
@@ -112,7 +193,24 @@
         });
   
       })
-
+      // display student report
+      $("#user-studentreport").change(function(e){
+        e.preventDefault()
+        var studentId = $(this).val();
+        var url = $("#user-studentreport").attr("data-course-url");  
+  
+        $.ajax({                     
+          url: url,                   
+          data: {
+            'studentid': studentId      
+          },
+          success: function (data) {  
+           
+            $("#displayreport").html(data);  
+          }
+        });
+  
+      })
       //select student course
       $("#student").change(function(e){
         e.preventDefault()

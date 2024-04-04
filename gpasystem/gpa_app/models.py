@@ -69,7 +69,7 @@ class User(AbstractUser,PermissionsMixin):
 class Lecturer(models.Model):
     Lec_no = models.CharField(max_length=10,blank=True, default="",unique=True)
     course_id  = models.ForeignKey('Course',on_delete=models.SET_NULL, null=True, blank=True)
-    user_id = models.ForeignKey('User',on_delete=models.CASCADE, null=True,blank=True)
+    user_id = models.OneToOneField('User',on_delete=models.CASCADE, null=True,blank=True,related_name='lecturer_profile')
    
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Lecturer(models.Model):
 class Student(models.Model):
     adm_no = models.CharField(max_length=10,blank=True, default="",unique=True)
     course_id  = models.ForeignKey('Course',on_delete=models.SET_NULL, null=True, blank=True)
-    user_id = models.ForeignKey('User',on_delete=models.CASCADE, null=True,blank=True)
+    user_id = models.OneToOneField('User',on_delete=models.CASCADE, null=True,blank=True,related_name='student_profile')
    
 
     def __str__(self):
@@ -104,9 +104,12 @@ class Exam(models.Model):
     unit_id  = models.ForeignKey('Unit',on_delete=models.SET_NULL, null=True, blank=True)
     student = models.ForeignKey('Student',on_delete=models.CASCADE, null=True,blank=True)
     lecturer = models.ForeignKey('Lecturer',on_delete=models.CASCADE, null=True,blank=True)
-    semister = models.ForeignKey('Semister',on_delete=models.CASCADE, null=True,blank=True)
-    score = models.IntegerField()
-    status = models.IntegerField()
+    lab = models.IntegerField(default=0)
+    quiz = models.IntegerField(default=0)
+    midsem = models.IntegerField(default=0)
+    endsem = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

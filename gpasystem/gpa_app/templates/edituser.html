@@ -1,0 +1,93 @@
+
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+
+
+    <!-- Page Content -->
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Welcome to GPA {% if request.user.accesslevel == 1 %} Admin {% elif request.user.accesslevel == 2 %} Lecturer {% else %} Student {% endif %}portal  </h1>
+    
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <!-- Your content here -->
+        <form id="registrationuserForm" method="post" data-course-url="{% url 'fetchuserCourse' %}">
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Oops! There was an error:</strong>
+                <ul>
+                    {% for field, error in form.errors.items %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" value="{{ user.firstname }}" name="firstname" {% if request.user.accesslevel != 1 %}readonly{% endif %}>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="middlename">Middle Name</label>
+                    <input type="text" class="form-control"  value="{{ user.middle_name }}" name="middlename" {% if request.user.accesslevel != 1 %}readonly{% endif %}>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" name = "lastname"  value="{{ user.last_name }}" {% if request.user.accesslevel != 1 %}readonly{% endif %}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" value="{{ user.email }}" {% if request.user.accesslevel != 1 %} readonly {% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="form">Phone</label>
+                <input type="text" class="form-control" value="{{ user.phone_number }}" name="phone" {% if request.user.accesslevel != 1 %} readonly {% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="password">Password(Leave it blank if you do not want to change)</label>
+                <input type="password" class="form-control" name = "password" >
+            </div>
+    
+            <div class="form-group">
+                <label for="userType">User Type</label>
+                <select name="usertype" id="usertypeedit" class="form-control" >
+                    <option value="{{ user.accesslevel }}" >{% if user.accesslevel ==   1  %}Admin{% elif user.accesslevel == 2 %}Lecturer {% elif user.accesslevel == 3 %} Student {% endif %}</option>
+                </select>
+            </div>
+    
+            <div class="form-group" id="courseField">
+                <label for="course">Course</label>
+                {% if request.user.accesslevel == 3 %}
+                <input type="text" class="form-control" value="{{ user.student_profile.course_id.course_name }}" name="coursename" readonly>
+                {% elif request.user.accesslevel == 2 %}
+                <input type="text" class="form-control" value="{{ user.lecturer_profile.course_id.course_name }}" name="coursename" readonly>
+                {% else %}
+                {% if user.accesslevel ==   2 or user.accesslevel == 3   %}
+                <select name="course" id="coursedit" class="form-control" >
+                    {% for course in courses %}
+                    <option value="{{ course.id }}" {% if course.id == course_id %} selected {% endif %} >{{ course.course_name }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+                {% endif %}
+                
+            
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+    <!-- /#page-content-wrapper -->
+    
+    {% endblock %}
+
+    
+    
+    

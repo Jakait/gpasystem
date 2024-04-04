@@ -7,7 +7,7 @@
     <!-- Page Content -->
 
         <div class="container-fluid">
-            <h1 class="mt-4">Welcome to GPA Dashboard</h1>
+            <h1 class="mt-4">Welcome to GPA {% if request.user.accesslevel == 1 %} Admin {% elif request.user.accesslevel == 2 %} Lecturer {% else %} Student {% endif %}portal  </h1>
 
             {% for message in messages %}
                         <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
